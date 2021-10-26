@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt'); // npm install --save bcrypt
+const jwt = require('jsonwebtoken'); // npm install --save jsonwebtoken
 const User = require('../models/User');
 
 // Création d'un nouvelle User

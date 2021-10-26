@@ -1,8 +1,11 @@
 const Sauce = require('../models/Sauce');
 const fs = require('fs'); // File system
 
-// Renvoyer un tableau contenant de toute les sauces
+// Renvoyer un tableau contenant toute les sauces
 exports.getAllSauce = (req, res, next) => {
+    console.log(res);
+    console.log(req);
+    console.log(next);
     // Trouver tout les objets
     Sauce.find()
         .then(sauces => res.status(200).json(sauces))
@@ -19,6 +22,7 @@ exports.getOneSauce =  (req, res, next) => {
 
 // Enregistrement des nouvelle Sauce dans la Base de Données
 exports.createSauce = (req, res, next) => {
+    console.log('fnreohfeo');
     const sauceObject = JSON.parse(req.body.sauce);
     // supresion de ID donne par mongodb
     delete sauceObject._id;

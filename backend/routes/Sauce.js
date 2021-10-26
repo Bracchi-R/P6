@@ -5,7 +5,7 @@ const SauceCtrl = require('../controllers/Sauce');
 const auth = require('../middleware/auth'); // Route de protection
 const multer = require('../middleware/multer-config');
 
-// On ajout auth pour proteger le route
+// On ajout auth pour proteger la route
 // Renvoyer un tableau contenant de toute les sauces
 router.get('/', auth, SauceCtrl.getAllSauce);
 
@@ -22,7 +22,7 @@ router.put('/:id', auth, multer, SauceCtrl.modifySauce);
 router.delete('/:id', auth, SauceCtrl.deleteSauce);
 
 // Like ou DisLike
-router.post('/:id/like', auth, sauceCtrl.likeOrNot)
+router.post('/:id/like', auth, SauceCtrl.likeOrNot)
 
 
 module.exports = router;

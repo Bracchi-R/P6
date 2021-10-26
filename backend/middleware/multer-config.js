@@ -1,5 +1,5 @@
 // Utilisation de multer pour enregistrer les fichiers images
-const multer = require('multer');
+const multer = require('multer'); // npm install --save multer
 
 // Modification de l'extension des fichiers
 const MIME_TYPES = {

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const uniqueValidator = require('mongoose-unique-validator');
+const uniqueValidator = require('mongoose-unique-validator'); // npm install --save mongoose-unique-validator
 
 // Création du model User pour un stockage dans la base de données
 const userSchema = mongoose.Schema({
