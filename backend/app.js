@@ -1,11 +1,10 @@
+// npm list --depth=0  verifier la librerie instaler
+
 const express = require('express'); // npm install --save express
 const bodyParser = require('body-parser'); // npm install --save body-parser
 const mongoose = require('mongoose'); // npm install --save mongoose
 const path = require('path');
 
-// npm list --depth=0  verifier le librerie instaler
-
-//? require('dotenv').config({ path: process.cwd() + '/.env' });
 
 // vas chercher les routes dans le dossier routes
 const SauceRoute = require('./routes/Sauce');
@@ -33,7 +32,7 @@ app.use(express.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use('/api/stuff', SauceRoute);
+app.use('/api/sauces', SauceRoute);
 app.use('/api/auth', UserRoute);
 
 

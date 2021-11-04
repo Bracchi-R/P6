@@ -3,9 +3,6 @@ const fs = require('fs'); // File system
 
 // Renvoyer un tableau contenant toute les sauces
 exports.getAllSauce = (req, res, next) => {
-    console.log(res);
-    console.log(req);
-    console.log(next);
     // Trouver tout les objets
     Sauce.find()
         .then(sauces => res.status(200).json(sauces))
@@ -22,21 +19,24 @@ exports.getOneSauce =  (req, res, next) => {
 
 // Enregistrement des nouvelle Sauce dans la Base de Données
 exports.createSauce = (req, res, next) => {
-    console.log('fnreohfeo');
     const sauceObject = JSON.parse(req.body.sauce);
     // supresion de ID donne par mongodb
-    delete sauceObject._id;
+    // delete sauceObject._id;
     // Création d'un nouvelle objet Sauce
     const sauce = new Sauce({
         // Copie de tous les éléments de req.body
-        ...req.sauceObject,
+        ...sauceObject,
+        likes:0,
+        dislikes:0,
+        usersLiked:[],
+        usersDisliked:[],
         // Création de l'URL de l'image : http://localhost:3000/image/nom
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });
     // Enregistre sauce dans la base de donnée
     sauce.save()
         // Renvoi une réponse de réussite
-        .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
+        .then(() => res.status(201).json({ message: 'Sauce enregistré !'}))
         // Renvoi une réponse avec l'erreur générée par Mongoose ainsi qu'un code d'erreur 400.
         .catch(error => res.status(400).json({ error }));
 };
@@ -52,7 +52,7 @@ exports.modifySauce = (req, res, next) => {
     } : { ...req.body };
     // UpdateOne permet de mèttre à jour la sauce
     Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+        .then(() => res.status(200).json({ message: 'Sauce modifié !'}))
         .catch(error => res.status(400).json({ error }));
 };
 
@@ -67,7 +67,7 @@ exports.deleteSauce = (req, res, next) => {
             fs.unlink(`images/${filename}`, () => {
                 // DeleteOne pour suprimer objet de la base de donée
                 Sauce.deleteOne({ _id: req.params.id })
-                    .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+                    .then(() => res.status(200).json({ message: 'Sauce supprimé !'}))
                     .catch(error => res.status(400).json({ error }));
             });
         })
